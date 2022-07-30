@@ -19,3 +19,9 @@ This project has the objective of learning how to build, document, and test web 
 	  * [ ] Create configurable base form url (gs.x/uniqueid).
 	  * [ ] Create public containerized envirioment to deploy not only in a more pratical way but also on personal home lab.
 	  * [ ] Create testing and building pipeline (optional).
+
+## Folder structure
+- ***Api***: Will be the folder in which all the api endpoints, documentation and relative tests will be.
+- ***Cmd***: Will be the folder in which we will find al excecutables necessary in order to start the shortener.
+- ***Website***: Will be the folder in which the static html files will be placed.
+
