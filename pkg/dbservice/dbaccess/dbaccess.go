@@ -17,7 +17,7 @@ func NewUrlCache() *UrlCacheConnection{
   }
 }
 
-func (uc *UrlCacheConnection) ConnectToCache() error{
+func (uc *UrlCacheConnection) Connect() error{
   rdb := redis.NewClient(&redis.Options{
 		Addr:     os.Getenv("RedisAddr"),
 		Password: "", // no password set
