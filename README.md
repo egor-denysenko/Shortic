@@ -22,6 +22,7 @@ This project has the objective of learning how to build, document, and test web 
 
 ## Folder structure
 - ***Api***: Will be the folder in which all the api endpoints, documentation and relative tests will be.
+- ***Pkg***: Will be the folder in which all the common code for the application is stored.
 - ***Cmd***: Will be the folder in which we will find al excecutables necessary in order to start the shortener.
 - ***Website***: Will be the folder in which the static html files will be placed.
 
