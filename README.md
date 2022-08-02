@@ -9,6 +9,7 @@ This project has the objective of learning how to build, document, and test web 
 * [ ] Non-functional
 	* [ ] API
 		* [ ] Version the API
+		* [ ] Implemente API Health checks for each service
 		* [ ] Document API endpoints
 	* [ ] Testing
 	  * [ ] Test basic edge cases of the backend.
