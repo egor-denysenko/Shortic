@@ -6,7 +6,7 @@ import (
 
 type IDbLogic interface{
   Connect() error 
-  SaveUrl() error // Not implemented
+  SaveUrl(fullUrl string,shortenUrl string) error 
 }
 
 type DbBusinnessLogic struct{
@@ -23,8 +23,6 @@ func (db *DbBusinnessLogic) Connect() error {
 	return db.DbAbs.Connect()
 }
 
-func (db *DbBusinnessLogic) Enqueue() error {
-	db.DbAbs.SaveUrl()
-	return nil
+func (db *DbBusinnessLogic) SaveUrl(fullUrl string,shorterUrl string) error {
+	return db.DbAbs.SaveUrl(fullUrl,shorterUrl)
 }
-
