@@ -4,6 +4,8 @@ import (
 	"net/http"
 ) 
 
+type AllowedMethods map[string]struct{}
+
 //Utility function that is responsible in order to verify if the correct version of the api is called
 func ApiVersionHeaderCheck(req *http.Request,endpointVersion string) bool{
   requestedApiVersion := req.Header.Get("Accept-Version")

@@ -7,7 +7,7 @@ import (
 
 func FormUrlShortener(w http.ResponseWriter, r *http.Request){
   // Check if only the supported method is called with the proper helper function
-  if !apiUtility.ApiAllowedMethods(r.Method,map[string]struct{}{"POST":{}}){
+  if !apiUtility.ApiAllowedMethods(r.Method,apiUtility.AllowedMethods{"POST":{}}){
     w.WriteHeader(http.StatusNotImplemented)
   }
 
