@@ -7,6 +7,7 @@ import (
 )
 
 func main(){
+  log.Println("Starting to serve rest api on port 7878")
   err := restApi.ServeRestApi()
   if err != nil{
     log.Default().Fatalln()
