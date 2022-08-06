@@ -20,5 +20,3 @@ func QueueServiceFactory() *QueueService {
 func (q *QueueService) Connect() error {
 	return q.service.Connect()
 }
-
-
