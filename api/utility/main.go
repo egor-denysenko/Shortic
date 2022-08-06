@@ -14,3 +14,11 @@ func ApiVersionHeaderCheck(req *http.Request,endpointVersion string) bool{
 
   return true 
 }
+
+func ApiAllowedMethods(methodRecieved string,methodsAllowed map[string]struct{}) bool{
+  if _, ok := methodsAllowed[methodRecieved]; ok {
+    return true
+  }
+  return false
+}
+  
