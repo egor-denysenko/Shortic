@@ -1,7 +1,7 @@
 package dbaccess
 
 import (
-	"os"
+	//"os"
 	"context"
 	"time"
 
@@ -21,8 +21,10 @@ func NewUrlCache() *UrlCacheConnection{
 // Connection to redis database
 func (uc *UrlCacheConnection) Connect() error{
   rdb := redis.NewClient(&redis.Options{
-    Addr:     os.Getenv("RedisAddr"), //URL from env tables
-		Password: "", // database password
+    //Addr:     os.Getenv("RedisAddr"), //URL from env tables
+		//Password: "", // database password
+    Addr:    "eu1-desired-loon-38077.upstash.io:38077",
+		Password: "326116961f9746f0b7b57b387065f923", // database password
 		DB:       0,  // use default DB
 	})
 	_, err := rdb.Ping(context.Background()).Result()
