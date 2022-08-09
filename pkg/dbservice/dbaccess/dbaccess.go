@@ -1,7 +1,7 @@
 package dbaccess
 
 import (
-	//"os"
+	"os"
 	"context"
 	"time"
 
@@ -21,10 +21,8 @@ func NewUrlCache() *UrlCacheConnection{
 // Connection to redis database
 func (uc *UrlCacheConnection) Connect() error{
   rdb := redis.NewClient(&redis.Options{
-    //Addr:     os.Getenv("RedisAddr"), //URL from env tables
-		//Password: "", // database password
-    Addr:    "eu1-desired-loon-38077.upstash.io:38077",
-		Password: "326116961f9746f0b7b57b387065f923", // database password
+    Addr:     os.Getenv("RedisAddr"), //URL from env tables
+		Password: "", // database password
 		DB:       0,  // use default DB
 	})
 	_, err := rdb.Ping(context.Background()).Result()
@@ -37,9 +35,17 @@ func (uc *UrlCacheConnection) Connect() error{
 
 // Function that saves the url for 24 hours into redis database
 func (uc *UrlCacheConnection) SaveUrl(fullUrl string, shorterUrl string) error{
-  err := uc.cacheconnection.Set(nil, fullUrl, shorterUrl, 86400*time.Second).Err()
+  err := uc.cacheconnection.Set(context.Background(), shorterUrl, fullUrl, 86400*time.Second).Err()
 	if err != nil {
 		return err
 	}
   return nil
+}
+
+func (uc *UrlCacheConnection) CheckUrlCollision(shortUrlKey string) bool{
+  _, err :=  uc.cacheconnection.Get(context.Background(), shortUrlKey).Result()
+	if err == redis.Nil {
+    return true
+  }
+  return false
 }

@@ -6,6 +6,7 @@ import (
 
 type IDbLogic interface{
   Connect() error 
+  CheckUrlCollision(shortUrlKey string) bool
   SaveUrl(fullUrl string,shortenUrl string) error 
 }
 
@@ -25,4 +26,8 @@ func (db *DbBusinnessLogic) Connect() error {
 
 func (db *DbBusinnessLogic) SaveUrl(fullUrl string,shorterUrl string) error {
 	return db.DbAbs.SaveUrl(fullUrl,shorterUrl)
+}
+
+func (db *DbBusinnessLogic) CheckUrlCollision(shortUrlKey string) bool{
+	return db.DbAbs.CheckUrlCollision(shortUrlKey)
 }
