@@ -2,7 +2,7 @@ package health_root
 
 import (
 	"net/http"
-	apiUtility "shortic/api/utility"
+	apiUtility "shortic/pkg/api/utility"
 )
 
 func RootHealth (w http.ResponseWriter, r *http.Request) {
