@@ -8,7 +8,7 @@ import (
 	"math/rand"
 	"net/http"
 	"net/url"
-	apiUtility "shortic/api/utility"
+	apiUtility "shortic/pkg/api/utility"
 	"shortic/pkg/dbservice"
 	"strings"
 	"time"

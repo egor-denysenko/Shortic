@@ -2,8 +2,8 @@ package api
 
 import (
 	"net/http"
-	url_shortener "shortic/api/data/shortener"
-	health_root "shortic/api/health"
+	url_shortener "shortic/pkg/api/data/shortener"
+	health_root "shortic/pkg/api/health"
 	"shortic/pkg/dbservice"
 )
 

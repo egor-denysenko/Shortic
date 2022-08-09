@@ -2,7 +2,7 @@ package main
 
 import (
 	"log"
-	restApi "shortic/api"
+	restApi "shortic/pkg/api"
 	"shortic/pkg/dbservice"
 )
 
