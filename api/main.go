@@ -7,7 +7,7 @@ import (
 	"shortic/pkg/dbservice"
 )
 
-func ServeRestApi(dbservice *dbservice.QueueService) error {
+func ServeRestApi(dbservice *dbservice.DatabaseService) error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/health/", health_root.RootHealth)
 	mux.HandleFunc("/health/redis", func(w http.ResponseWriter, r *http.Request) {})
