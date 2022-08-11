@@ -33,10 +33,20 @@ func RedirectFromShortUrl(dbservice dbservice.ConsumerService) http.HandlerFunc{
       return
     }
     
-    if utf8.RuneCountInString(urlPathSlice[1]) < 7 || utf8.RuneCountInString(urlPathSlice[1]) > 7{
+    if utf8.RuneCountInString(urlPathSlice[1]) < 5 || utf8.RuneCountInString(urlPathSlice[1]) > 5{
       http.Error(w,ShortedUrlNotValid,http.StatusBadRequest)
       return
     }
+
+    fullUrl := dbservice.FindShortenUrl(urlPathSlice[1])
+
+    if fullUrl == "" {
+      http.Error(w,ShortedUrlNotValid,http.StatusNotFound)
+    }
+
+    http.Redirect(w, r, fullUrl,301)
+
+    return
   } 
 }
 
