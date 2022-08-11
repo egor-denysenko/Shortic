@@ -105,7 +105,7 @@ func reduceUrl(fullUserUrl string) string{
 
   rand.Seed(time.Now().UnixNano())
 
-  for i := 0; i < 5; i++ {
+  for i := 0; i < 7; i++ {
       randomIndex := rand.Intn(len(hashRune))
       b.WriteRune(hashRune[randomIndex])
   }

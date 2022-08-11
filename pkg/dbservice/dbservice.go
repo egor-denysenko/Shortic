@@ -8,7 +8,7 @@ import (
 type ConsumerService dblogic.IDbLogic
 
 type DatabaseService struct {
-	service *dblogic.DbBusinnessLogic
+	service ConsumerService
 }
 
 func QueueServiceFactory() *DatabaseService {
@@ -27,4 +27,8 @@ func (q *DatabaseService) SaveUrl(fullUrl string,shorterUrl string) error {
 
 func (q *DatabaseService) CheckUrlCollision(shortUrlKey string) bool{
 	return q.service.CheckUrlCollision(shortUrlKey)
+}
+
+func (q *DatabaseService) FindShortenUrl(shortUrlKey string) string{
+	return q.service.FindShortenUrl(shortUrlKey)
 }

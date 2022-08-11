@@ -4,7 +4,7 @@ This project has the objective of learning how to build, document, and test web 
 
 * [ ] Functional
 	* [X] Accept URL to short from a POST request and provvide the shortened url.
-	* [ ] When using that url, it will redirect to the appropriate url.
+	* [X] When using that url, it will redirect to the appropriate url.
 	* [ ] Show url statistics (time opened, time remaining) via web interface and API endpoint.
 * [ ] Non-functional
 	* [ ] API

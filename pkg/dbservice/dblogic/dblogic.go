@@ -8,6 +8,7 @@ type IDbLogic interface{
   Connect() error 
   CheckUrlCollision(shortUrlKey string) bool
   SaveUrl(fullUrl string,shortenUrl string) error 
+  FindShortenUrl(shortUrlKey string) string
 }
 
 type DbBusinnessLogic struct{
@@ -30,4 +31,8 @@ func (db *DbBusinnessLogic) SaveUrl(fullUrl string,shorterUrl string) error {
 
 func (db *DbBusinnessLogic) CheckUrlCollision(shortUrlKey string) bool{
 	return db.DbAbs.CheckUrlCollision(shortUrlKey)
+}
+
+func (db *DbBusinnessLogic) FindShortenUrl(shortUrlKey string) string{
+	return db.DbAbs.FindShortenUrl(shortUrlKey)
 }
