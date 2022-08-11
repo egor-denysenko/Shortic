@@ -3,6 +3,7 @@ package dbaccess
 import (
 	"os"
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/go-redis/redis/v8"
@@ -22,11 +23,12 @@ func NewUrlCache() *UrlCacheConnection{
 func (uc *UrlCacheConnection) Connect() error{
   rdb := redis.NewClient(&redis.Options{
     Addr:     os.Getenv("RedisAddr"), //URL from env tables
-		Password: "", // database password
+		Password: os.Getenv("RedisPass"), // database password
 		DB:       0,  // use default DB
 	})
 	_, err := rdb.Ping(context.Background()).Result()
 	if err != nil {
+    fmt.Println(err)
 		return err
 	}
 	uc.cacheconnection = rdb
@@ -48,4 +50,11 @@ func (uc *UrlCacheConnection) CheckUrlCollision(shortUrlKey string) bool{
     return true
   }
   return false
+}
+func (uc *UrlCacheConnection) FindShortenUrl(shortUrlKey string) string{
+  fullUrl, err :=  uc.cacheconnection.Get(context.Background(), shortUrlKey).Result()
+	if err == redis.Nil {
+    return ""
+  }
+  return fullUrl
 }
