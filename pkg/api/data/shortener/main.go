@@ -28,8 +28,18 @@ type responsePostBody struct {
 	ShortenUrl string `json:"shortenUrl"`
 }
 
-// Wrapper in order to accept and use the redis connection provvided.
+// Shortic  ... Portable url shortener
+// @Summary
+// @Description
+// @Tags Shortener
+// @Param Url body postUrlBody true "Url"
+// @Success 200 {object} responsePostBody
+// @Failure 501 {object} object
+// @Failure 410 {object} object
+// @Failure 400 {object} object
+// @Router /data/shortener [post]
 func FormUrlShortenerHandler(dbservice *dbservice.DatabaseService) http.HandlerFunc {
+	// Wrapper in order to accept and use the redis connection provvided.
 	return func(w http.ResponseWriter, r *http.Request) {
 
 		// Check if only the supported method is called with the proper helper function
@@ -40,7 +50,6 @@ func FormUrlShortenerHandler(dbservice *dbservice.DatabaseService) http.HandlerF
 		// Confront if the Accept-Version header is compatible with the enpoint version
 		if !apiUtility.ApiVersionHeaderCheck(r, "0.0.1") {
 			http.Error(w, ErrWrongApiVersion, http.StatusGone)
-			//w.WriteHeader(http.StatusGone)
 		}
 
 		var urlBodyStruct postUrlBody

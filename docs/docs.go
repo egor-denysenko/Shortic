@@ -28,13 +28,66 @@ const docTemplate = `{
                         "description": "Moved Permanently"
                     },
                     "400": {
-                        "description": "Bad Request"
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
                     },
                     "404": {
-                        "description": "Not Found"
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
                     },
                     "410": {
-                        "description": "Gone"
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/data/shortener": {
+            "post": {
+                "tags": [
+                    "Shortener"
+                ],
+                "parameters": [
+                    {
+                        "description": "Url",
+                        "name": "Url",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/shortener.postUrlBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/shortener.responsePostBody"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "type": "object"
+                        }
                     }
                 }
             }
@@ -51,8 +104,29 @@ const docTemplate = `{
                         "description": "OK"
                     },
                     "410": {
-                        "description": "Gone"
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
                     }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "shortener.postUrlBody": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "shortener.responsePostBody": {
+            "type": "object",
+            "properties": {
+                "shortenUrl": {
+                    "type": "string"
                 }
             }
         }
