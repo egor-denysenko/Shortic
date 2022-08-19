@@ -6,20 +6,26 @@ import (
 	"shortic/pkg/dbservice"
 )
 
-func main(){
+// @title   Shortic API documentation
+// @version 0.0.1
 
-  dbservice := dbservice.QueueServiceFactory()
-  dberr := dbservice.Connect()
+// @host     localhost:7878
+// @BasePath /
 
-  if dberr != nil {
-    log.Default().Fatalln("Failed Database Connection")
-  }
+func main() {
 
-  log.Println("Starting to serve rest api on port 7878")
+	dbservice := dbservice.QueueServiceFactory()
+	dberr := dbservice.Connect()
 
-  err := restApi.ServeRestApi(dbservice)
+	if dberr != nil {
+		log.Default().Fatalln("Failed Database Connection")
+	}
 
-  if err != nil{
-    log.Default().Fatalln("Failed Exposing REST API")
-  }
+	log.Println("Starting to serve rest api on port 7878")
+
+	err := restApi.ServeRestApi(dbservice)
+
+	if err != nil {
+		log.Default().Fatalln("Failed Exposing REST API")
+	}
 }
