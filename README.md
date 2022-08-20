@@ -8,9 +8,9 @@ This project has the objective of learning how to build, document, and test web 
 	* [ ] Show url statistics (time opened, time remaining) via web interface and API endpoint.
 * [ ] Non-functional
 	* [ ] API
-		* [ ] Version the API
+		* [X] Version the API
 		* [ ] Implemente API Health checks for each service
-		* [ ] Document API endpoints
+		* [X] Document API endpoints
 	* [ ] Testing
 	  * [ ] Test basic edge cases of the backend.
 	  * [ ] Test possible user inputs throught form.

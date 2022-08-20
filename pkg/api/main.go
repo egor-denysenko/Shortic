@@ -12,9 +12,9 @@ func ServeRestApi(dbservice *dbservice.DatabaseService) error {
 	mux := http.NewServeMux()
 	mux.HandleFunc("/", api_root.RedirectFromShortUrl(dbservice))
 	mux.HandleFunc("/health/", health_root.RootHealth)
+  // not implemented 
 	mux.HandleFunc("/health/redis", func(w http.ResponseWriter, r *http.Request) {})
 	mux.HandleFunc("/data/shortener", url_shortener.FormUrlShortenerHandler(dbservice))
-	//mux.HandleFunc()
 
 	return http.ListenAndServe(":7878", mux)
 }
