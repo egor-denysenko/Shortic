@@ -1,0 +1,81 @@
+basePath: /
+definitions:
+  shortener.postUrlBody:
+    properties:
+      url:
+        type: string
+    type: object
+  shortener.responsePostBody:
+    properties:
+      shortenUrl:
+        type: string
+    type: object
+host: localhost:7878
+info:
+  contact: {}
+  title: Shortic API documentation
+  version: 0.0.1
+paths:
+  /:
+    get:
+      description: From shorten url redirect to original shotened url
+      responses:
+        "301":
+          description: Moved Permanently
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            type: object
+        "410":
+          description: Gone
+          schema:
+            type: object
+      summary: Redirect to original url
+      tags:
+      - Shortener
+  /data/shortener:
+    post:
+      parameters:
+      - description: Url
+        in: body
+        name: Url
+        required: true
+        schema:
+          $ref: '#/definitions/shortener.postUrlBody'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/shortener.responsePostBody'
+        "400":
+          description: Bad Request
+          schema:
+            type: object
+        "410":
+          description: Gone
+          schema:
+            type: object
+        "501":
+          description: Not Implemented
+          schema:
+            type: object
+      tags:
+      - Shortener
+  /health/:
+    get:
+      description: Chech API Health
+      responses:
+        "200":
+          description: OK
+        "410":
+          description: Gone
+          schema:
+            type: object
+      summary: Check API Health
+      tags:
+      - Health
+swagger: "2.0"
