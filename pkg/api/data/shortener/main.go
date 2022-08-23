@@ -83,7 +83,6 @@ func FormUrlShortenerHandler(dbservice *dbservice.DatabaseService) http.HandlerF
 		w.Header().Set("Content-Type", "application/json")
 
 		response := responsePostBody{ShortenUrl: shortenUrl}
-		//log.Default().Fatalln("qui va dopo url check")
 
 		jsonResp, err := json.Marshal(response)
 		if err != nil {
