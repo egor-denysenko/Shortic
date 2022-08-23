@@ -1,9 +1,11 @@
 package main
 
 import (
+	"flag"
 	"log"
 	restApi "shortic/pkg/api"
 	"shortic/pkg/dbservice"
+	"shortic/pkg/deployment"
 )
 
 // @title   Shortic API documentation
@@ -13,7 +15,13 @@ import (
 // @BasePath /
 
 func main() {
+  flag.BoolVar(&deployment.SoftwareInfo, "h", false, "log specs about the software")
+  flag.Parse()
 
+  if deployment.SoftwareInfo {
+    deployment.LogSoftwareInfo()
+  }
+  
 	dbservice := dbservice.QueueServiceFactory()
 	dberr := dbservice.Connect()
 
