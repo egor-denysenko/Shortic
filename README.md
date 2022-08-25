@@ -6,15 +6,13 @@ This project has the objective of learning how to build, document, and test web 
 	* [X] Accept URL to short from a POST request and provvide the shortened url.
 	* [X] When using that url, it will redirect to the appropriate url.
 	* [ ] Show url statistics (time opened, time remaining) via web interface and API endpoint.
-* [ ] Non-functional
-	* [ ] API
+* [X] Non-functional
+	* [X] API
 		* [X] Version the API
-		* [ ] Implemente API Health checks for each service
 		* [X] Document API endpoints
-	* [ ] Deployment
-	  * [ ] Create configurable base form url (gs.x/uniqueid).
-	  * [ ] Create public containerized envirioment to deploy not only in a more pratical way but also on personal home lab.
-	  * [ ] Create testing and building pipeline (optional).
+	* [X] Deployment
+	  * [X] Create configurable base form url (gs.x/uniqueid).
+	  * [X] Create public containerized envirioment to deploy not only in a more pratical way but also on personal home lab.
 
 ## Folder structure
 - ***Api***: Will be the folder in which all the api endpoints, documentation and relative tests will be.
