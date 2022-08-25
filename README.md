@@ -22,3 +22,23 @@ This project has the objective of learning how to build, document, and test web 
 - ***Cmd***: Will be the folder in which we will find al excecutables necessary in order to start the shortener.
 - ***Website***: Will be the folder in which the static html files will be placed.
 
+## Building Instruction
+
+In alternative it is possible to build the binary
+```
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -ldflags="-X 'shortic/pkg/deployment.version="0.0.1"' -X 'shortic/pkg/deployment.commitHash=$(git rev-parse HEAD)' -X 'shortic/pkg/deployment.buildUser=$(git config user.name)' -X 'shortic/pkg/deployment.buildTime=$(date)'" -o ./build/shortic ./cmd/restapi/main.go
+```
+
+### Self Host Docker Container
+
+In order to build the application this is the tested command:
+ ```
+ sudo docker build \
+ --build-arg version=0.0.1 \
+ --build-arg commitHash="$(git rev-parse HEAD)" \
+ --build-arg buildUser="$(git config user.name)" \``
+  --build-arg buildTime="$(date)" \
+ -t Shortic \
+  .
+```
+Or use the public image (Not implemented)
