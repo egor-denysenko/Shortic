@@ -1,9 +1,13 @@
 package main
 
 import (
+	"flag"
 	"log"
 	restApi "shortic/pkg/api"
 	"shortic/pkg/dbservice"
+	"shortic/pkg/deployment"
+
+	"github.com/joho/godotenv"
 )
 
 // @title   Shortic API documentation
@@ -13,6 +17,16 @@ import (
 // @BasePath /
 
 func main() {
+  flag.BoolVar(&deployment.SoftwareInfo, "h", false, "log specs about the software")
+  flag.Parse()
+
+  if deployment.SoftwareInfo {
+    deployment.LogSoftwareInfo()
+  }
+  errEnv := godotenv.Load()
+  if errEnv != nil {
+    log.Fatal("Error loading .env file")
+  }
 
 	dbservice := dbservice.QueueServiceFactory()
 	dberr := dbservice.Connect()
@@ -21,11 +35,10 @@ func main() {
 		log.Default().Fatalln("Failed Database Connection")
 	}
 
-	log.Println("Starting to serve rest api on port 7878")
 
-	err := restApi.ServeRestApi(dbservice)
+	ApiErr := restApi.ServeRestApi(dbservice)
 
-	if err != nil {
-		log.Default().Fatalln("Failed Exposing REST API")
+	if ApiErr != nil {
+    log.Default().Fatalln("Failed Exposing REST API:",ApiErr)
 	}
 }

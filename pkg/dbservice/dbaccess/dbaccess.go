@@ -2,7 +2,6 @@ package dbaccess
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"time"
 
@@ -28,7 +27,6 @@ func (uc *UrlCacheConnection) Connect() error {
 	})
 	_, err := rdb.Ping(context.Background()).Result()
 	if err != nil {
-		fmt.Println(err)
 		return err
 	}
 	uc.cacheconnection = rdb
