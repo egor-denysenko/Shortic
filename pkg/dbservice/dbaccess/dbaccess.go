@@ -1,38 +1,58 @@
 package dbaccess
 
 import (
-  "os"
-  "context"
-  "fmt"
+	"context"
+	"os"
+	"time"
+
 	"github.com/go-redis/redis/v8"
 )
 
-type UrlCacheConnection struct{
-  cacheconection *redis.Client
+type UrlCacheConnection struct {
+	cacheconnection *redis.Client
 }
 
-func NewUrlCache() *UrlCacheConnection{
-  return &UrlCacheConnection{
-      cacheconection: nil,
-  }
+func NewUrlCache() *UrlCacheConnection {
+	return &UrlCacheConnection{
+		cacheconnection: nil,
+	}
 }
 
-func (uc *UrlCacheConnection) Connect() error{
-  rdb := redis.NewClient(&redis.Options{
-		Addr:     os.Getenv("RedisAddr"),
-		Password: "", // no password set
-		DB:       0,  // use default DB
+// Connection to redis database
+func (uc *UrlCacheConnection) Connect() error {
+	rdb := redis.NewClient(&redis.Options{
+		Addr:     os.Getenv("RedisAddr"), //URL from env tables
+		Password: os.Getenv("RedisPass"), // database password
+		DB:       0,                      // use default DB
 	})
 	_, err := rdb.Ping(context.Background()).Result()
-	fmt.Println(err)
 	if err != nil {
 		return err
 	}
-	uc.cacheconection = rdb
+	uc.cacheconnection = rdb
 	return nil
 }
 
-// Not implemented
-func (uc *UrlCacheConnection) SaveUrl() error{
-  return nil
+// Function that saves the url for 24 hours into redis database
+func (uc *UrlCacheConnection) SaveUrl(fullUrl string, shorterUrl string) error {
+	err := uc.cacheconnection.Set(context.Background(), shorterUrl, fullUrl, 86400*time.Second).Err()
+	if err != nil {
+		return err
+	}
+	return nil
+}
+
+func (uc *UrlCacheConnection) CheckUrlCollision(shortUrlKey string) bool {
+	_, err := uc.cacheconnection.Get(context.Background(), shortUrlKey).Result()
+	if err == redis.Nil {
+		return true
+	}
+	return false
+}
+func (uc *UrlCacheConnection) FindShortenUrl(shortUrlKey string) string {
+	fullUrl, err := uc.cacheconnection.Get(context.Background(), shortUrlKey).Result()
+	if err == redis.Nil {
+		return ""
+	}
+	return fullUrl
 }

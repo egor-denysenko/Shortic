@@ -1,0 +1,126 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Shortic API documentation",
+        "contact": {},
+        "version": "0.0.1"
+    },
+    "host": "localhost:7878",
+    "basePath": "/",
+    "paths": {
+        "/": {
+            "get": {
+                "description": "From shorten url redirect to original shotened url",
+                "tags": [
+                    "Shortener"
+                ],
+                "summary": "Redirect to original url",
+                "responses": {
+                    "301": {
+                        "description": "Moved Permanently"
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/data/shortener": {
+            "post": {
+                "tags": [
+                    "Shortener"
+                ],
+                "parameters": [
+                    {
+                        "description": "Url",
+                        "name": "Url",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/shortener.postUrlBody"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/shortener.responsePostBody"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
+                    },
+                    "501": {
+                        "description": "Not Implemented",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        },
+        "/health/": {
+            "get": {
+                "description": "Chech API Health",
+                "tags": [
+                    "Health"
+                ],
+                "summary": "Check API Health",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "410": {
+                        "description": "Gone",
+                        "schema": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "shortener.postUrlBody": {
+            "type": "object",
+            "properties": {
+                "url": {
+                    "type": "string"
+                }
+            }
+        },
+        "shortener.responsePostBody": {
+            "type": "object",
+            "properties": {
+                "shortenUrl": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
